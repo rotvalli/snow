@@ -24,7 +24,6 @@ const appendStyleSheet = (id, content) => {
 
 const createStyleElement = (id, content) => {
     var style = document.createElement("style");
-    style.type = "text/css";
     style.id = id;
 
     if (style.styleSheet) {
@@ -53,14 +52,14 @@ const seedFlake = (top) => {
 const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
 
 const update = () => {
-    flakes.map((e) => {
-        const eTop = parseFloat(e.style.top || 0)
-        if (eTop > height - flakeSize * 2.0) {
-            e.style.top = (-1 * flakeSize) + "px";
+    flakes.map((flake) => {
+        const eTop = parseFloat(flake.style.top || 0)
+        if (eTop > height - (flakeSize * 2.0)) {
+            flake.style.top = (-1 * flakeSize) + "px";
         }
         else {
-            e.style.top = (eTop + speed + Math.random()) + "px";
-            e.style.left = (parseFloat(e.style.left || 0) +
+            flake.style.top = (eTop + speed + Math.random()) + "px";
+            flake.style.left = (parseFloat(flake.style.left || 0) +
                 ((Math.random() - 0.5) / flakeSize)) + "%";
         }
     });
@@ -80,14 +79,14 @@ const init = () => {
     height = updateHeight();
     remove(".flake");
 
-    [...Array(density).keys()].map(
-        _ => [...Array(height).keys()].map(h => seedFlake(h))
+    Array(density).fill(null).map(
+        () => Array(height).fill(null).map((_ , h) => seedFlake(h))
     );
 
     flakes = [...body.getElementsByClassName("flake")];
 }
 
-appendStyleSheet("demo", styles);
+appendStyleSheet("snowflakes", styles);
 init();
 window.requestAnimationFrame(loop);
 window.onresize = init;
