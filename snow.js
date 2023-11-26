@@ -1,5 +1,6 @@
 const styles = `
     .flake{
+        border-radius: 1px;
         background: white;
         position: absolute;
         z-index: 999999;
