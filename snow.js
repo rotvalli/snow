@@ -8,7 +8,7 @@ const styles = `
 const body = document.body, html = document.documentElement;
 const minFps = 20;
 const flakeSize = 4.0;
-const speed = 1.0;
+const speed = 0.6;
 const density = 2;
 
 let flakes = [];
@@ -59,9 +59,8 @@ const update = () => {
         }
         else {
             flake.style.top = (eTop + speed + Math.random()) + "px";
-            flake.style.left = (parseFloat(flake.style.left || 0) +
-                ((Math.random() - 0.5) / flakeSize)) + "%";
         }
+        flake.style.left = (parseFloat(flake.style.left || 0.0) + ((Math.random() - 0.5) / 3.8)) + "%";
     });
 }
 
