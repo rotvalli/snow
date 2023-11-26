@@ -80,7 +80,7 @@ const init = () => {
     remove(".flake");
 
     Array(density).fill(null).map(
-        () => Array(height).fill(null).map((_ , h) => seedFlake(h))
+        _ => Array(height).fill(null).map((_ , h) => seedFlake(h))
     );
 
     flakes = [...body.getElementsByClassName("flake")];
