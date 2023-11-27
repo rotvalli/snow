@@ -6,9 +6,9 @@ let height = window.innerHeight;
 canvas.height = height;
 canvas.width = width;
 
-const count = 4000;
+const count = 2000;
 const drag = 0.25;
-const gravity = 0.68;
+const gravity = 0.98;
 let snowflakes = [];
 let angle = 0;
 let landCount = 0;
@@ -56,6 +56,10 @@ const move = () => {
     snowflakes.map(f => {
         if (!f.down) {
             f.x += Math.sin(drag * angle + f.angle) * f.radius;
+            if(f.x < -5 || f.x > canvas.width){
+                f.x = Math.floor(width / 2 + Math.sin(Math.random() * 360) * width);
+                f.y =Math.floor(Math.random() * height);
+            }
             f.y += f.radius / 2 * gravity;
             const sinCurve1 = ((wave1-angle)*(Math.sin((f.x-phase1)/width1)));
             const sinCurve2 = ((wave2+angle)*(Math.sin((f.x-phase2)/width2)));
