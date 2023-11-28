@@ -21,7 +21,7 @@ let width2 = 200;
 
 const seedFlake = (top) => {
     snowflakes.push({
-        x: Math.floor(width / 2 + Math.sin(Math.random() * 360) * width),
+        x: Math.floor(width / 2 + Math.sin((-1* (width/2))+ Math.random() * 360) * (width*2)),
         y: top?0:Math.floor(Math.random() * height),
         radius: Math.random() * 5 + 1,
         opacity: Math.floor(Math.random() * 10)/10 ,
@@ -56,10 +56,6 @@ const move = () => {
     snowflakes.map(f => {
         if (!f.down) {
             f.x += Math.sin(drag * angle + f.angle) * f.radius;
-            if(f.x < -5 || f.x > canvas.width){
-                f.x = Math.floor(width / 2 + Math.sin(Math.random() * 360) * width);
-                f.y =Math.floor(Math.random() * height);
-            }
             f.y += f.radius / 2 * gravity;
             const sinCurve1 = ((wave1-angle)*(Math.sin((f.x-phase1)/width1)));
             const sinCurve2 = ((wave2+angle)*(Math.sin((f.x-phase2)/width2)));
@@ -72,8 +68,14 @@ const move = () => {
 
             if (f.y > canvas.height - snowDepth) {
                 landCount++;
-                f.down = true;
-                seedFlake(true);
+                if(f.x < -5 || f.x > canvas.width){
+                    f.x = Math.floor(width / 2 + Math.sin(Math.random() * 360) * width);
+                    f.y =Math.floor(Math.random() * height);
+                }
+                else{
+                    f.down = true;
+                    seedFlake(true);
+                }    
             }
         }
     });
