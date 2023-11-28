@@ -89,10 +89,12 @@ const update = () => {
 };
 
 const resize = () => {
-    init();
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.height = height;
+    canvas.width = width;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
+    init();
 };
 
 init();
